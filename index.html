@@ -438,7 +438,7 @@
             .nav-links {
                 position: fixed;
                 top: 70px;
-                right: -100%;
+                left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
                 background-color: var(--white);
@@ -447,22 +447,24 @@
                 align-items: center;
                 padding: 2rem 0;
                 box-shadow: var(--shadow);
-                transition: right 0.3s ease;
+                transition: left 0.3s ease;
+                z-index: 999;
             }
             
             .nav-links.active {
-                right: 0;
+                left: 0;
             }
             
             .nav-links li {
                 margin: 1rem 0;
+                width: 80%;
             }
             
             .nav-links a {
                 font-size: 1.2rem;
                 padding: 1rem;
                 display: block;
-                width: 200px;
+                width: 100%;
                 text-align: center;
                 border-radius: 8px;
                 transition: all 0.3s ease;
@@ -480,13 +482,13 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">Atom</a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#">Inicio</a></li>
                 <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
                 <li><a href="Atom-universitarios.html">Atom para universitarios</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
-            <div class="mobile-menu">
+            <div class="mobile-menu" id="mobileMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -692,29 +694,33 @@
         });
 
         // Funcionalidad del menú móvil
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        // Cerrar menú al hacer click en un enlace
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                navLinks.classList.remove('active');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (mobileMenu && navLinks) {
+            mobileMenu.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                mobileMenu.classList.toggle('active');
+                navLinks.classList.toggle('active');
             });
-        });
-
-        // Cerrar menú al hacer click fuera de él
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && !navLinks.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
+        
+            // Cerrar menú al hacer click en un enlace
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        
+            // Cerrar menú al hacer click fuera de él
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !navLinks.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        }
     </script>
 </body>
 </html>
