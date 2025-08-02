@@ -72,6 +72,37 @@
             color: var(--accent-color);
         }
 
+        /* Menú móvil */
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            z-index: 1001;
+        }
+
+        .mobile-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Animación del menú hamburguesa */
+        .mobile-menu.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -221,26 +252,6 @@
             line-height: 1.6;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .content-header h2 {
-                font-size: 1.8rem;
-            }
-            
-            .philosophy-section {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .philosophy-card {
-                padding: 1.5rem;
-            }
-            
-            .content-text-section {
-                text-align: left;
-            }
-        }
-        
         /* Sección de Beneficios */
         .benefits {
             background-color: var(--background-light);
@@ -314,27 +325,6 @@
             line-height: 1.6;
             margin: 0;
         }
-        
-        /* Responsive para beneficios */
-        @media (max-width: 768px) {
-            .benefits-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .benefit-card {
-                padding: 1.25rem;
-            }
-            
-            .benefit-icon {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .benefit-content h3 {
-                font-size: 1rem;
-            }
-        }
 
         /* CTA Final */
         .cta-section {
@@ -375,61 +365,7 @@
             }
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-section h2 {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Menú móvil*/
-        .mobile-menu {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            z-index: 1001;
-        }
-
-        .mobile-menu span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: var(--primary-color);
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        /* Animación del menú hamburguesa */
-        .mobile-menu.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-
-        .mobile-menu.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-
-        /* Menú móvil desplegable */
+        /* Responsive para móvil */
         @media (max-width: 768px) {
             .mobile-menu {
                 display: flex;
@@ -474,6 +410,53 @@
                 background-color: var(--background-light);
                 color: var(--primary-color);
             }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .content-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .philosophy-section {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .philosophy-card {
+                padding: 1.5rem;
+            }
+            
+            .content-text-section {
+                text-align: left;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .benefit-card {
+                padding: 1.25rem;
+            }
+            
+            .benefit-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .benefit-content h3 {
+                font-size: 1rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -488,7 +471,7 @@
                 <li><a href="Atom-universitarios.html">Atom para universitarios</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
-            <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu" id="mobileMenu" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -505,61 +488,61 @@
         </div>
     </section>
 
-<!-- Contenido Principal -->
-<section class="main-content">
-    <div class="content-container">
-        <div class="content-header">
-            <h2>Domina el arte de estudiar con ciencia</h2>
-            <div class="accent-line"></div>
-        </div>
-        
-        <div class="content-text-section">
-            <p class="content-text">
-                En Atom te enseñamos a dominar el estudio como una ciencia. Aquí aprenderás a 
-                organizar tu tiempo, mantener la concentración, gestionar tu energía y aplicar técnicas de 
-                estudio comprobadas para rendir al máximo. Nuestro enfoque está diseñado para quienes 
-                aspiran a ingresar a universidades exigentes, y saben que el camino no es solo estudiar 
-                más, sino estudiar con estrategia, intención y disciplina.
-            </p>
-        </div>
-        
-        <div class="philosophy-section">
-            <div class="philosophy-card">
-                <div class="philosophy-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                    </svg>
-                </div>
-                <h3>Metodología comprobada</h3>
-                <p>Técnicas respaldadas por la neurociencia y la psicología del aprendizaje</p>
+    <!-- Contenido Principal -->
+    <section class="main-content">
+        <div class="content-container">
+            <div class="content-header">
+                <h2>Domina el arte de estudiar con ciencia</h2>
+                <div class="accent-line"></div>
             </div>
-            <div class="philosophy-card">
-                <div class="philosophy-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                    </svg>
-                </div>
-                <h3>Enfoque personalizado</h3>
-                <p>Adaptamos las estrategias a tu estilo de aprendizaje y objetivos específicos</p>
+            
+            <div class="content-text-section">
+                <p class="content-text">
+                    En Atom te enseñamos a dominar el estudio como una ciencia. Aquí aprenderás a 
+                    organizar tu tiempo, mantener la concentración, gestionar tu energía y aplicar técnicas de 
+                    estudio comprobadas para rendir al máximo. Nuestro enfoque está diseñado para quienes 
+                    aspiran a ingresar a universidades exigentes, y saben que el camino no es solo estudiar 
+                    más, sino estudiar con estrategia, intención y disciplina.
+                </p>
             </div>
-            <div class="philosophy-card">
-                <div class="philosophy-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="2" x2="12" y2="20"></line>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="15.83" y2="8.17"></line>
-                        <line x1="14.83" y1="16.17" x2="19.66" y2="21"></line>
-                        <line x1="8.17" y1="15.83" x2="2.66" y2="21.34"></line>
-                        <line x1="12" y1="12" x2="16.24" y2="7.76"></line>
-                    </svg>
+            
+            <div class="philosophy-section">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <h3>Metodología comprobada</h3>
+                    <p>Técnicas respaldadas por la neurociencia y la psicología del aprendizaje</p>
                 </div>
-                <h3>Resultados medibles</h3>
-                <p>Seguimiento continuo de tu progreso con métricas claras y objetivas</p>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>Enfoque personalizado</h3>
+                    <p>Adaptamos las estrategias a tu estilo de aprendizaje y objetivos específicos</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="2" x2="12" y2="20"></line>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="15.83" y2="8.17"></line>
+                            <line x1="14.83" y1="16.17" x2="19.66" y2="21"></line>
+                            <line x1="8.17" y1="15.83" x2="2.66" y2="21.34"></line>
+                            <line x1="12" y1="12" x2="16.24" y2="7.76"></line>
+                        </svg>
+                    </div>
+                    <h3>Resultados medibles</h3>
+                    <p>Seguimiento continuo de tu progreso con métricas claras y objetivas</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Beneficios -->
     <section class="benefits">
@@ -656,6 +639,38 @@
     </footer>
 
     <script>
+        // Función simple para el menú móvil
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        }
+
+        // Cerrar menú al hacer click en los enlaces
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const navLinks = document.getElementById('navLinks');
+                
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Cerrar menú al hacer click fuera del menú
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navLinks = document.getElementById('navLinks');
+            const navContainer = document.querySelector('.nav-container');
+            
+            if (!navContainer.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
         // Smooth scrolling para los enlaces
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -692,35 +707,6 @@
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
         });
-
-        // Funcionalidad del menú móvil
-        const mobileMenu = document.getElementById('mobileMenu');
-        const navLinks = document.getElementById('navLinks');
-        
-        if (mobileMenu && navLinks) {
-            mobileMenu.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                mobileMenu.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-        
-            // Cerrar menú al hacer click en un enlace
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('active');
-                    navLinks.classList.remove('active');
-                });
-            });
-        
-            // Cerrar menú al hacer click fuera de él
-            document.addEventListener('click', (e) => {
-                if (!mobileMenu.contains(e.target) && !navLinks.contains(e.target)) {
-                    mobileMenu.classList.remove('active');
-                    navLinks.classList.remove('active');
-                }
-            });
-        }
     </script>
 </body>
 </html>
